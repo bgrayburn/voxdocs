@@ -1,15 +1,19 @@
 { pkgs, lib, config, inputs, ... }:
 
 {
-  # https://devenv.sh/basics/
-  env.GREET = "devenv";
+  processes.ui.exec = "cd $DEVENV_ROOT/ui && npm run start";
+  processes.backend.exec = "cd $DEVENV_ROOT/backend/voxdocs-server && uvicorn main:app --reload";
 
   pre-commit.hooks = {
-    biome.enable = true;
+    # biome.enable = true;
+    prettier.enable = true;
     shellcheck.enable = true;
     nixpkgs-fmt.enable = true;
     statix.enable = true;
     black.enable = true;
     ruff.enable = true;
   };
+
+  difftastic.enable = true;
+  dotenv.enable = true;
 }
