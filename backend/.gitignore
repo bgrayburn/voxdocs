@@ -1,0 +1,13 @@
+# nix
+
+result
+result-*
+.pre-commit-config.yaml
+.devenv*
+.direnv*
+
+# python
+
+*.pyc
+
+.env
