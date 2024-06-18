@@ -13,6 +13,6 @@
   languages.python.venv = {
     enable = true;
     quiet = true;
-    requirements = "./backend/requirements.txt";
+    requirements = ./requirements.txt;
   };
 }
