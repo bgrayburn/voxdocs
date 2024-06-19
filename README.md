@@ -23,3 +23,6 @@ In the root of the repo
 ## TODO
 - [ ] thread per session to avoid leaking data
 - [ ] reduce dependency on assistants api
+- [ ] user ability to store api key in local session and make requests from client avoiding the need for a deployed backend
+- [ ] history
+- [ ] visual indication of pending instructions
