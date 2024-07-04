@@ -26,10 +26,11 @@ app.add_middleware(
 # gets API Key from environment variable OPENAI_API_KEY
 client = openai.OpenAI()
 
-assistant_id = os.environ["ASSISTANT_ID"]
+assistant_id = os.environ["OPENAI_ASSISTANT_ID"]
+
+assistant = client.beta.assistants.retrieve(assistant_id)
 
 thread = client.beta.threads.create()
-assistant = client.beta.assistants.retrieve(assistant_id)
 
 
 @app.post("/")
@@ -42,25 +43,38 @@ def root(req: RequestObject):
     run = client.beta.threads.runs.create(
         thread_id=thread.id, assistant_id=assistant_id
     )
-    return {"text": executeRun(run)}
+    return {"text": executeRun(run, thread.id)}
 
 
-def executeRun(run):
+def executeRun(run, thread_id):
     print("checking assistant status. ")
+    # TODO: use async await here instead of while True
     while True:
-        run = client.beta.threads.runs.retrieve(thread_id=thread.id, run_id=run.id)
+        run = client.beta.threads.runs.retrieve(thread_id=thread_id, run_id=run.id)
 
         if run.status == "completed":
             print("done!")
-            messages = client.beta.threads.messages.list(thread_id=thread.id)
+            messages = client.beta.threads.messages.list(thread_id=thread_id)
 
             print("messages: ")
             for message in messages:
-                assert message.content[0].type == "text"
-                print({"role": message.role, "message": message.content[0].text.value})
+                assert (message.content.__len__() == 0) or (
+                    message.content[0].type == "text"
+                )
+                if message.content.__len__() > 0:
+                    print(
+                        {"role": message.role, "message": message.content[0].text.value}
+                    )
+                else:
+                    print("empty message")
 
             break
         else:
             print("in progress...")
             time.sleep(5)
-    return [m.content[0].text.value for m in messages if m.role == "assistant"][0]
+
+    return [
+        m.content[0].text.value if m.content.__len__() > 0 else ""
+        for m in messages
+        if m.role == "assistant"
+    ][0]
