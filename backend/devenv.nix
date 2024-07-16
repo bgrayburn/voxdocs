@@ -8,6 +8,9 @@
              -H "Content-Type: application/json" \ 
     	 -d "{\"text\":\"Test Message\"}"
   '';
+  scripts.create-assistant.exec = ''
+    python $DEVENV_ROOT/backend/scripts/create_assistant.py
+  '';
 
   languages.python.enable = true;
   languages.python.venv = {
