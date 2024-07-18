@@ -5,7 +5,6 @@
   processes.backend.exec = "cd $DEVENV_ROOT/backend/voxdocs-server && uvicorn main:app --reload";
 
   pre-commit.hooks = {
-    # biome.enable = true;
     prettier.enable = true;
     shellcheck.enable = true;
     nixpkgs-fmt.enable = true;
