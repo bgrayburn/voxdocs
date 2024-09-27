@@ -18,11 +18,13 @@ type InterfaceButton = {
 function App() {
   const [text, setText] = useState<string>("");
   const [instruction, setInstruction] = useState<string>("");
+  const [showPendingAction, setShowPendingAction] = useState<boolean>(false);
 
   async function submitInstruction(submittedInstruction: string) {
     setInstruction("");
+    setShowPendingAction(true);
 
-    const req_data = { instruction: submittedInstruction };
+    const req_data = { instruction: submittedInstruction, document: text };
     const response = await fetch(SERVER_URL, {
       method: "POST",
       mode: "cors",
@@ -33,6 +35,7 @@ function App() {
     });
     const res_obj = await response.json();
 
+    setShowPendingAction(false);
     if (response.ok) {
       console.log(res_obj);
       setText(res_obj.text);
