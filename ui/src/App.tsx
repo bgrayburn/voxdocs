@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { download } from "./util/FileUtil";
 
-const SERVER_URL = "http://127.0.0.1:8000/";
+const SERVER_URL = `${window.location.protocol}//${window.location.hostname}:8000`;
 
 const button_classes =
   "border-2 bg-black text-white w-fit p-3 rounded-full drop-showdow-md";

@@ -1,3 +1,4 @@
+import json
 import time
 import os
 
@@ -9,6 +10,7 @@ from pydantic import BaseModel
 
 class RequestObject(BaseModel):
     instruction: str
+    document: str
 
 
 origins = ["*"]
@@ -35,15 +37,17 @@ thread = client.beta.threads.create()
 
 @app.post("/")
 def root(req: RequestObject):
+    print("incoming request")
     client.beta.threads.messages.create(
         thread_id=thread.id,
         role="user",
-        content=req.instruction,
+        content=json.dumps({"instruction": req.instruction, "document": req.document}),
     )
     run = client.beta.threads.runs.create(
         thread_id=thread.id, assistant_id=assistant_id
     )
-    return {"text": executeRun(run, thread.id)}
+    run_result = executeRun(run, thread.id)
+    return {"text": run_result}
 
 
 def executeRun(run, thread_id):
@@ -68,13 +72,16 @@ def executeRun(run, thread_id):
                 else:
                     print("empty message")
 
-            break
+            return [
+                m.content[0].text.value if m.content.__len__() > 0 else ""
+                for m in messages
+                if m.role == "assistant"
+            ][0]
+        elif run.status == "failed":
+            print("request failed")
+            breakpoint()
+            return "ERROR: Request to OpenAI Failed"
         else:
             print("in progress...")
-            time.sleep(5)
-
-    return [
-        m.content[0].text.value if m.content.__len__() > 0 else ""
-        for m in messages
-        if m.role == "assistant"
-    ][0]
+            print(f"{run.status}")
+            time.sleep(1)
