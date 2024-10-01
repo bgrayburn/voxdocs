@@ -2,8 +2,6 @@
 
 ![animation of voxdocs being used to create and use a grocery list](./docs/voxdocs.gif)
 
-**WARNING!:** This software currently uses a single OpenAI thread for communications from all sessions meaning it's ripe for leaking data. For this and many other reasons, this software is a POC and not ready for production.
-
 ## Summary
 
 This app was created as a simple example of building a UI utlizing OpenAI's APIs for data transforms.
@@ -59,8 +57,9 @@ Run `npm run start`
 
 ## TODO
 
-- [ ] thread per session to avoid leaking data
 - [ ] reduce dependency on assistants api
+- [ ] responsive for mobile usage
+- [ ] custom checkbox rendering (use html checkbox)
 - [ ] user ability to store api key in local session and make requests from client avoiding the need for a deployed backend
 - [ ] history
 - [ ] visual indication of pending instructions

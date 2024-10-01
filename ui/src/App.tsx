@@ -3,6 +3,8 @@ import React from "react";
 import { useEffect, useRef, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { download } from "./util/FileUtil";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SERVER_URL = `${window.location.protocol}//${window.location.hostname}:8000`;
 
@@ -37,8 +39,12 @@ function App() {
 
     setShowPendingAction(false);
     if (response.ok) {
-      console.log(res_obj);
-      setText(res_obj.text);
+      console.log(`res_obj.document: ${res_obj.document}`);
+      setText(res_obj.document);
+      console.log(`res.message: ${res_obj.message}`);
+      if (res_obj.message) {
+        toast(res_obj.message);
+      }
     } else {
       return Promise.reject(new Error("server request failed"));
     }
@@ -116,6 +122,7 @@ function App() {
           </button>
         ))}
       </div>
+      <ToastContainer position="top-left" theme="colored" closeOnClick />
     </div>
   );
 }
