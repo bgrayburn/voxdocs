@@ -63,7 +63,7 @@ Run `npm run start`
 - [ ] reduce dependency on assistants api
 - [ ] user ability to store api key in local session and make requests from client avoiding the need for a deployed backend
 - [ ] history
-- [ ] visual indication of pending instructions
+- [x] visual indication of pending instructions
 - [ ] production deployment
 - [ ] settings panel
 - [ ] voice output (messages only)
