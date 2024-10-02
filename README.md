@@ -19,11 +19,19 @@ Assuming you have nix, devenv, and direnv installed, you need to `cd` into the r
 
 #### w/o Nix
 
-_coming..._
+#### Install Dependencies
+
+**Base dependencies:**
+
+- python
+- javascript/npm
+  **Libraries:**
+- `cd backend && pip install -r requirements.txt`
+- `cd ui && npm install`
 
 ### Create OpenAI assistant
 
-Note the `assistant_id` from the output of doing this. You will need it when creating the `.env` file.
+Note the `assistant_id` from the output of doing this next step. You will need it when creating the `.env` file.
 
 #### w/ Nix
 
@@ -57,6 +65,7 @@ Run `npm run start`
 
 ## TODO (? indicates a need for further assessment of utility of the feature)
 
+- [ ] update screen capture to reflect current UI
 - [ ] add tests
 - [ ] add IAC
 - [ ] add CI/CD
