@@ -57,6 +57,10 @@ Run `npm run start`
 
 ## TODO
 
+- [ ] add tests
+- [ ] add IAC
+- [ ] add CI/CD
+- [ ] add monitoring/logs
 - [ ] responsive for mobile usage
 - [ ] better documentation on setup (including non-nix instructions)
 - [ ] custom checkbox rendering (use html checkbox)
