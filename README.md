@@ -55,7 +55,7 @@ Run `cd voxdocs-server && uvicorn main:app --reload`
 In the `ui` folder:
 Run `npm run start`
 
-## TODO
+## TODO (? indicates a need for further assessment of utility of the feature)
 
 - [ ] add tests
 - [ ] add IAC
@@ -64,12 +64,14 @@ Run `npm run start`
 - [ ] responsive for mobile usage
 - [ ] better documentation on setup (including non-nix instructions)
 - [ ] custom checkbox rendering (use html checkbox)
+- [ ] interactive checkboxes
 - [ ] reduce dependency on assistants api
-- [ ] user ability to store api key in local session and make requests from client avoiding the need for a deployed backend
-- [ ] history
 - [x] visual indication of pending instructions
 - [ ] production deployment
 - [ ] settings panel
 - [ ] voice output (messages only)
 - [ ] voice input
-- [ ] mobile app version?
+- [ ] user ability to store api key in local session and make requests from client avoiding the need for a deployed backend (?)
+- [ ] mobile app version (?)
+- [ ] history (?)
+- [ ] streaming responses (?)
