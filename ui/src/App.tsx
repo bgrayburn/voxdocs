@@ -5,6 +5,7 @@ import ReactMarkdown from "react-markdown";
 import { download } from "./util/FileUtil";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "./components/loader.css";
 
 const SERVER_URL = `${window.location.protocol}//${window.location.hostname}:8000`;
 
@@ -77,53 +78,62 @@ function App() {
   ];
 
   return (
-    <div className="App static p-5 flex flex-row h-screen">
-      <div id="left-col" className="flex-auto flex mx-5 flex-col h-dvh">
-        <div className="prose m-auto w-full overflow-scroll flex-1 bg-orange-100 rounded-md p-5">
-          <ReactMarkdown>{text ? text : "..."}</ReactMarkdown>
-        </div>
-        <div id="input-bar" className="w-3/4 m-auto">
-          <form
-            onSubmit={(evt) => {
-              submitInstruction(instruction);
-              evt.preventDefault();
-            }}
-            className="flex flex-row w-full"
-          >
-            <input
-              type="text"
-              ref={chatbox}
-              className="flex-auto resize-none border-3 px-5 p-3 rounded-full rounded-tr-md rounded-br-md"
-              value={instruction}
-              onChange={(evt) =>
-                setInstruction((evt.target as HTMLInputElement).value)
-              }
-            />
-            <button
-              id="instruct-button"
-              type="submit"
-              className={`${button_menu_classes} rounded-tl-md rounded-bl-md`}
+    <>
+      <div className="App static md:p-5 flex flex-row h-screen w-screen">
+        <div id="left-col" className="flex-auto flex md:mx-5 flex-col h-dvh">
+          <div className="prose m-auto w-full overflow-scroll flex-1 bg-orange-100 rounded-md p-5">
+            <ReactMarkdown>{text ? text : "..."}</ReactMarkdown>
+          </div>
+          <div id="input-bar" className="w-3/4 m-auto">
+            <form
+              onSubmit={(evt) => {
+                submitInstruction(instruction);
+                evt.preventDefault();
+              }}
+              className="flex flex-row w-full"
             >
-              instruct
-            </button>
-          </form>
+              <input
+                type="text"
+                ref={chatbox}
+                className="flex-auto resize-none border-3 px-5 p-3 rounded-full rounded-tr-md rounded-br-md"
+                value={instruction}
+                onChange={(evt) =>
+                  setInstruction((evt.target as HTMLInputElement).value)
+                }
+              />
+              <button
+                id="instruct-button"
+                type="submit"
+                className={`${button_menu_classes} rounded-tl-md rounded-bl-md`}
+              >
+                instruct
+              </button>
+            </form>
+          </div>
         </div>
-      </div>
-      <div id="right-col" className="w-44 flex-col">
-        {buttons.map((b) => (
-          <button
-            type="button"
-            key={b.label}
-            id={`${b.label}-button`}
-            className={button_menu_classes}
-            onClick={b.callback}
-          >
-            {b.label}
-          </button>
-        ))}
+        <div id="right-col" className="md:w-44 flex-col">
+          {buttons.map((b) => (
+            <button
+              type="button"
+              key={b.label}
+              id={`${b.label}-button`}
+              className={button_menu_classes}
+              onClick={b.callback}
+            >
+              {b.label}
+            </button>
+          ))}
+        </div>
       </div>
       <ToastContainer position="top-left" theme="colored" closeOnClick />
-    </div>
+      {showPendingAction ? (
+        <div className="fixed top-0 left-0 opacity-75 bg-black w-screen h-screen">
+          <div className="loader" />
+        </div>
+      ) : (
+        ""
+      )}
+    </>
   );
 }
 
