@@ -1,10 +1,11 @@
 import hotkeys from "hotkeys-js";
 import React from "react";
 import { useEffect, useRef, useState } from "react";
-import ReactMarkdown from "react-markdown";
+import ReactMarkdown, { Components } from "react-markdown";
 import { download } from "./util/FileUtil";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { ListItemRenderer } from "./components/CustomMarkdownComponents";
 
 const SERVER_URL = `${window.location.protocol}//${window.location.hostname}:8000`;
 
@@ -80,7 +81,9 @@ function App() {
     <div className="App static p-5 flex flex-row h-screen">
       <div id="left-col" className="flex-auto flex mx-5 flex-col h-dvh">
         <div className="prose m-auto w-full overflow-scroll flex-1 bg-orange-100 rounded-md p-5">
-          <ReactMarkdown>{text ? text : "..."}</ReactMarkdown>
+          <ReactMarkdown components={{ li: ListItemRenderer }}>
+            {text || "..."}
+          </ReactMarkdown>
         </div>
         <div id="input-bar" className="w-3/4 m-auto">
           <form
