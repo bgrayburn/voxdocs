@@ -65,7 +65,7 @@ Run `npm run start`
 
 ## TODO (? indicates a need for further assessment of utility of the feature)
 
-- [ ] update screen capture to reflect current UI
+- [x] update screen capture to reflect current UI
 - [ ] add tests
 - [ ] add IAC
 - [ ] add CI/CD
