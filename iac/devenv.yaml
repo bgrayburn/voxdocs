@@ -2,7 +2,6 @@
 inputs:
   nixpkgs:
     url: github:cachix/devenv-nixpkgs/rolling
-
 # If you're using non-OSS software, you can set allowUnfree to true.
 # allowUnfree: true
 
@@ -11,7 +10,5 @@ inputs:
 #  - "openssl-1.1.1w"
 
 # If you have more than one devenv you can merge them
-imports:
-  - ./ui
-  - ./backend
-  - ./iac
+#imports:
+# - ./backend
