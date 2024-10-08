@@ -5,10 +5,13 @@
   packages = with pkgs; [ git opentofu doctl ];
 
   # https://devenv.sh/scripts/
-
-  # https://devenv.sh/tasks/
-  # tasks = {
-  #   "myproj:setup".exec = "mytool build";
-  #   "devenv:enterShell".after = [ "myproj:setup" ];
-  # };
+  scripts.plan.exec = ''
+    cd $DEVENV_ROOT/iac && tofu plan -out plan
+  '';
+  scripts.deploy.exec = ''
+    cd $DEVENV_ROOT/iac && tofu apply plan
+  '';
+  # scripts.destroy.exec = ''
+  #   cd $DEVENV_ROOT/iac && tofu destroy -auto-approve
+  # '';
 }

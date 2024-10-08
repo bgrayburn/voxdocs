@@ -66,8 +66,10 @@ Run `npm run start`
 ## TODO (? indicates a need for further assessment of utility of the feature)
 
 - [x] update screen capture to reflect current UI
-- [ ] add tests
+- [ ] move api endpoint to inside nextjs
 - [ ] add IAC
+- [ ] https setup (needed for navigator.clipboard to work anywhere but localhost)
+- [ ] add tests
 - [ ] add CI/CD
 - [ ] add monitoring/logs
 - [ ] responsive for mobile usage
