@@ -79,7 +79,7 @@ function App() {
   return (
     <>
       <div className="App static md:p-5 flex flex-row h-screen w-screen">
-        <div id="left-col" className="flex-auto flex md:mx-5 flex-col h-dvh">
+        <div id="left-col" className="flex-auto flex md:mx-5 flex-col h-full">
           <div className="prose m-auto w-full overflow-scroll flex-1 bg-orange-100 rounded-md p-5">
             <ReactMarkdown>{text ? text : "..."}</ReactMarkdown>
           </div>
