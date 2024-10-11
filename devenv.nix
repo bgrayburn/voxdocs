@@ -5,7 +5,7 @@
     gh
   ];
 
-  scripts.github.exec = 'gh repo view -w';
+  scripts.github.exec = "gh repo view -w";
 
   # https://devenv.sh/languages/
   languages.typescript.enable = true;
