@@ -31,13 +31,7 @@ Assuming you have nix, devenv, and direnv installed, you need to `cd` into the r
 
 Note the `assistant_id` from the output of doing this next step. You will need it when creating the `.env` file.
 
-#### w/ Nix
-
-Run `create-assistant`
-
-#### w/o Nix
-
-Run `python scripts/create_assistant.py`
+Use `https://platform.openai.com/assistants` to create a new assistant with the prompt found in `assistant/prompt.txt` file.
 
 ### Create .env file
 
