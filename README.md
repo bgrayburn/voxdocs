@@ -49,6 +49,44 @@ export default tseslint.config({
 });
 ```
 
+## Deployment
+
+Login:
+
+```
+flyctl auth login
+```
+
+Create an app:
+
+```
+flyctl apps create voxdocs
+```
+
+Allocate ipv4:
+
+```
+flyctl ips allocate-v4
+```
+
+Copy the container to fly.io registry:
+
+```
+devenv container processes --copy
+```
+
+Create a volume for `devenv` state:
+
+```
+fly volumes create devenv_state --region ams --size 1
+```
+
+Deploy your app:
+
+```
+flyctl deploy
+```
+
 ## Todo
 
 - [ ] remove dead config from src (left over from move from CRA)
