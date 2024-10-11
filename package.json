@@ -4,7 +4,7 @@
   "type": "module",
   "version": "0.0.0",
   "scripts": {
-    "dev": "concurrently \"npx vite\" \"npx ts-node-dev --respawn --transpile-only server.ts\"",
+    "dev": "concurrently \"npx vite\" \"npx ts-node-dev --respawn -T -P tsconfig.node.json server.ts\"",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
