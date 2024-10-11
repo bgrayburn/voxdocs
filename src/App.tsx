@@ -27,7 +27,7 @@ function App() {
     setShowPendingAction(true);
 
     const req_data = { instruction: submittedInstruction, document: text };
-    const response = await fetch(`${SERVER_URL}/api/instruct`, {
+    const response = await fetch(`${SERVER_URL}api/instruct`, {
       method: "POST",
       mode: "cors",
       headers: {
@@ -36,16 +36,11 @@ function App() {
       body: JSON.stringify(req_data),
     });
 
-    if (response.ok) {
-      setInstruction("");
-      const res_obj = await response.json(handleNetworkError);
-      console.log(res_obj);
-    } else {
-      toast("There was a network error, please try again");
-    }
-
     setShowPendingAction(false);
     if (response.ok) {
+      setInstruction("");
+      const res_obj = await response.json();
+      console.log(res_obj);
       const document = JSON.parse(res_obj).document;
       console.log(`document: ${document}`);
       setText(document);
@@ -55,6 +50,7 @@ function App() {
         toast(message);
       }
     } else {
+      toast("There was a network error, please try again");
       return Promise.reject(new Error("server request failed"));
     }
   }
