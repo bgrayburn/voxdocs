@@ -24,7 +24,9 @@ Assuming you have nix, devenv, and direnv installed, you need to `cd` into the r
 **Base dependencies:**
 
 - javascript/npm
-  **Libraries:**
+
+**Libraries:**
+
 - `npm install`
 
 ### Create OpenAI assistant
