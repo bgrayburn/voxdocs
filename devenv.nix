@@ -1,12 +1,6 @@
 { pkgs, lib, config, inputs, ... }:
 
 {
-  packages = with pkgs; [
-    gh
-  ];
-
-  scripts.github.exec = "gh repo view -w";
-
   # https://devenv.sh/languages/
   languages.typescript.enable = true;
   languages.javascript = {
@@ -14,8 +8,22 @@
     npm.install.enable = true;
   };
 
+  packages = with pkgs; [] ++ lib.optionals (!config.container.isBuilding) [
+    gh
+    flyctl
+  ];
+
+  scripts.github.exec = "gh repo view -w";
+
   # https://devenv.sh/pre-commit-hooks/
   pre-commit.hooks.prettier.enable = true;
+
+  containers.processes.name = "voxdocs";
+  containers.processes.registry = "docker://registry.fly.io/";
+  containers.processes.defaultCopyArgs = [
+    "--dest-creds"
+    "x:\"$(${pkgs.flyctl}/bin/flyctl auth token)\""
+  ];
 
   dotenv.enable = true;
   difftastic.enable = true;
