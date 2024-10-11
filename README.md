@@ -29,12 +29,6 @@ Assuming you have nix, devenv, and direnv installed, you need to `cd` into the r
 
 - `npm install`
 
-### Create OpenAI assistant
-
-Note the `assistant_id` from the output of doing this next step. You will need it when creating the `.env` file.
-
-Use `https://platform.openai.com/assistants` to create a new assistant with the prompt found in `assistant/prompt.txt` file.
-
 ### Create .env file
 
 Please add a `.env` file to the root of the repo based on the `.env.example` file.
@@ -53,6 +47,17 @@ Run `npm run dev`
 
 ## Todo
 
-- [ ] remove dead config from src (left over from move from CRA)
+- [x] remove dead config from src (left over from move from CRA)
 - [ ] look into eslint changes in original vite output `README.md`
-- [ ] create assistant using js script
+- [ ] add tests
+- [ ] add CI/CD
+- [ ] add monitoring/logs
+- [ ] responsive for mobile usage
+- [ ] interactive checkboxes
+- [ ] production deployment
+- [ ] settings panel
+- [ ] voice output (messages only)
+- [ ] voice input
+- [ ] user ability to store api key in local session and make requests from client avoiding the need for a deployed backend (?)
+- [ ] mobile app version (?)
+- [ ] history (?)

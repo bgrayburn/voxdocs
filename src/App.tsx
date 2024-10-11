@@ -42,10 +42,10 @@ function App() {
     if (response.ok) {
       const res_obj = await response.json();
       console.log(res_obj);
-      const document = JSON.parse(res_obj).document;
+      const document = res_obj.document;
       console.log(`document: ${document}`);
       setText(document);
-      const message = JSON.parse(res_obj).message;
+      const message = res_obj.message;
       console.log(`message: ${message}`);
       if (message) {
         toast(message);

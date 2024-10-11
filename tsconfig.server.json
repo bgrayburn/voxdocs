@@ -16,5 +16,5 @@
     "noUnusedParameters": true, // Error on unused parameters
     "noFallthroughCasesInSwitch": true // Error on fallthrough cases in switch statements
   },
-  "include": ["server.ts"] // Include the server entry point
+  "include": ["./server/**"] // Include the server entry point
 }
