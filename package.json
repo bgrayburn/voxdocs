@@ -4,7 +4,7 @@
   "type": "module",
   "version": "0.0.0",
   "scripts": {
-    "dev": "concurrently \"npx vite\" \"cd server && npx tsx watch server.ts\"",
+    "dev": "concurrently \"npx vite\" \"cd server && npx tsx watch src/server.ts\"",
     "build": "tsc -b && vite build --outDir dist/client",
     "start-client": "npx vite",
     "lint": "eslint .",
