@@ -1,5 +1,8 @@
 { pkgs, lib, config, inputs, ... }:
 
+let
+  isBuilding = config.container.isBuilding;
+in 
 {
   name = "voxdocs";
 
@@ -10,13 +13,13 @@
   scripts.prod-serve.exec = "node ./dist/server.js";
 
   # https://devenv.sh/languages/
-  languages.typescript.enable = true;
+  languages.typescript.enable = !isBuilding;
   languages.javascript = {
     enable = true;
-    npm.install.enable = true;
+    npm.install.enable = !isBuilding;
   };
 
-  packages = with pkgs; [] ++ lib.optionals (!config.container.isBuilding) [
+  packages = with pkgs; [] ++ lib.optionals (!isBuilding) [
     gh
     flyctl
   ];
@@ -24,15 +27,17 @@
   scripts.github.exec = "gh repo view -w";
 
   # https://devenv.sh/pre-commit-hooks/
-  pre-commit.hooks.prettier.enable = true;
+  pre-commit.hooks.prettier.enable = !isBuilding;
 
   containers."voxdocs".name = "voxdocs";
   containers."voxdocs".registry = "docker://registry.fly.io/";
   containers."voxdocs".copyToRoot = ./dist;
-  containers.processes.defaultCopyArgs = [
+  containers."voxdocs".startupCommand = "node server.js";
+  containers."voxdocs".defaultCopyArgs = [
     "--dest-creds"
     "x:\"$(${pkgs.flyctl}/bin/flyctl auth token)\""
   ];
+
 
   dotenv.enable = true;
   difftastic.enable = true;
