@@ -1,6 +1,8 @@
 { pkgs, lib, config, inputs, ... }:
 
 {
+  processes.start.exec = "npm run dev";
+
   # https://devenv.sh/languages/
   languages.typescript.enable = true;
   languages.javascript = {

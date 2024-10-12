@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect, useRef, useState } from "react";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { download } from "./util/fileUtil";
 // import { handleNetworkError } from './util/errorHandling'
 import { ToastContainer, toast } from "react-toastify";
@@ -24,10 +25,11 @@ function App() {
   const [showPendingAction, setShowPendingAction] = useState<boolean>(false);
 
   async function submitInstruction(submittedInstruction: string) {
+    setInstruction("");
     setShowPendingAction(true);
 
     const req_data = { instruction: submittedInstruction, document: text };
-    const response = await fetch(`${SERVER_URL}/api/instruct`, {
+    const response = await fetch(`${SERVER_URL}api/instruct`, {
       method: "POST",
       mode: "cors",
       headers: {
@@ -36,25 +38,20 @@ function App() {
       body: JSON.stringify(req_data),
     });
 
-    if (response.ok) {
-      setInstruction("");
-      const res_obj = await response.json(handleNetworkError);
-      console.log(res_obj);
-    } else {
-      toast("There was a network error, please try again");
-    }
-
     setShowPendingAction(false);
     if (response.ok) {
-      const document = JSON.parse(res_obj).document;
+      const res_obj = await response.json();
+      console.log(res_obj);
+      const document = res_obj.document;
       console.log(`document: ${document}`);
       setText(document);
-      const message = JSON.parse(res_obj).message;
+      const message = res_obj.message;
       console.log(`message: ${message}`);
       if (message) {
         toast(message);
       }
     } else {
+      toast("There was a network error, please try again");
       return Promise.reject(new Error("server request failed"));
     }
   }
@@ -83,9 +80,11 @@ function App() {
   return (
     <>
       <div className="App static md:p-5 flex flex-row h-screen w-screen">
-        <div id="left-col" className="flex-auto flex md:mx-5 flex-col h-dvh">
+        <div id="left-col" className="flex-auto flex md:mx-5 flex-col h-full">
           <div className="prose m-auto w-full overflow-scroll flex-1 bg-orange-100 rounded-md p-5">
-            <ReactMarkdown>{text ? text : "..."}</ReactMarkdown>
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>
+              {text ? text : "..."}
+            </ReactMarkdown>
           </div>
           <div id="input-bar" className="w-3/4 m-auto">
             <form

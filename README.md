@@ -1,53 +1,49 @@
-# React + TypeScript + Vite
+# Voxdocs
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![animation of voxdocs being used to create and use a grocery list](./docs/voxdocs.gif)
 
-Currently, two official plugins are available:
+## Summary
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This app was created as a simple example of building a UI utlizing OpenAI's APIs for data transforms.
 
-## Expanding the ESLint configuration
+## Setup
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+To use nix, make sure you have nix and devenv installed (and optionally direnv)
 
-- Configure the top-level `parserOptions` property like this:
+### Install dependencies
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-});
-```
+#### w/ Nix
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+This project is setup to use [`devenv`](https://devenv.sh) to manage a development environment, including dependencies, process management, and in the future testing.
+Assuming you have nix, devenv, and direnv installed, you need to `cd` into the root of the repo, then run `direnv allow` to install all of the dependencies used in the repo (or `devenv shell` if you aren't using direnv).
 
-```js
-// eslint.config.js
-import react from "eslint-plugin-react";
+#### w/o Nix
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: "18.3" } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs["jsx-runtime"].rules,
-  },
-});
-```
+#### Install Dependencies
+
+**Base dependencies:**
+
+- javascript/npm
+
+**Libraries:**
+
+- `npm install`
+
+### Create .env file
+
+Please add a `.env` file to the root of the repo based on the `.env.example` file.
+
+## Usage
+
+### w/ Nix
+
+In the root of the repo run `devenv up` to start the server.
+
+### w/o Nix
+
+#### 1. Start everything up
+
+Run `npm run dev`
 
 ## Deployment
 
@@ -89,4 +85,17 @@ flyctl deploy
 
 ## Todo
 
-- [ ] remove dead config from src (left over from move from CRA)
+- [x] remove dead config from src (left over from move from CRA)
+- [ ] look into eslint changes in original vite output `README.md`
+- [ ] add tests
+- [ ] add CI/CD
+- [ ] add monitoring/logs
+- [ ] responsive for mobile usage
+- [ ] interactive checkboxes
+- [ ] production deployment
+- [ ] settings panel
+- [ ] voice output (messages only)
+- [ ] voice input
+- [ ] user ability to store api key in local session and make requests from client avoiding the need for a deployed backend (?)
+- [ ] mobile app version (?)
+- [ ] history (?)
