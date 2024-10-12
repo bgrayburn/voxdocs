@@ -1,7 +1,13 @@
 { pkgs, lib, config, inputs, ... }:
 
 {
+  name = "voxdocs";
+
   processes.start.exec = "npm run dev";
+  scripts.build.exec = "build-server && build-client";
+  scripts.build-server.exec = "cd server && npm run build";
+  scripts.build-client.exec = "npm run build";
+  scripts.prod-serve.exec = "node ./dist/server.js";
 
   # https://devenv.sh/languages/
   languages.typescript.enable = true;
@@ -20,8 +26,9 @@
   # https://devenv.sh/pre-commit-hooks/
   pre-commit.hooks.prettier.enable = true;
 
-  containers.processes.name = "voxdocs";
-  containers.processes.registry = "docker://registry.fly.io/";
+  containers."voxdocs".name = "voxdocs";
+  containers."voxdocs".registry = "docker://registry.fly.io/";
+  containers."voxdocs".copyToRoot = ./dist;
   containers.processes.defaultCopyArgs = [
     "--dest-creds"
     "x:\"$(${pkgs.flyctl}/bin/flyctl auth token)\""

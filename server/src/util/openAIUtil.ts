@@ -31,7 +31,7 @@ const functions = [
 ];
 
 // Function to get a response conforming to the specified JSON schema
-export async function getAssistantResponse(jsonInput) {
+export async function getAssistantResponse(jsonInput: object) {
   try {
     const completion = await openai.chat.completions.create({
       model: "gpt-4o-mini",
@@ -43,11 +43,16 @@ export async function getAssistantResponse(jsonInput) {
       function_call: { name: "getInstructionResponse" },
     });
 
-    // Extract the function call arguments (structured JSON)
-    const functionArgs = completion.choices[0].message.function_call.arguments;
-    const response = JSON.parse(functionArgs);
+    if (completion.choices[0].message.function_call) {
+      // Extract the function call arguments (structured JSON)
+      const functionArgs =
+        completion.choices[0].message.function_call.arguments;
+      const response = JSON.parse(functionArgs);
 
-    return response;
+      return response;
+    } else {
+      throw new Error("No function call on return object.");
+    }
   } catch (error) {
     console.error("Error generating response:", error);
     return { error: "Failed to generate a valid JSON response." };

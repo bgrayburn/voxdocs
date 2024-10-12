@@ -1,9 +1,7 @@
-import React from "react";
 import { useEffect, useRef, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { download } from "./util/fileUtil";
-// import { handleNetworkError } from './util/errorHandling'
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./components/loader.css";

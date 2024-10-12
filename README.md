@@ -85,7 +85,6 @@ flyctl deploy
 
 ## Todo
 
-- [x] remove dead config from src (left over from move from CRA)
 - [ ] look into eslint changes in original vite output `README.md`
 - [ ] add tests
 - [ ] add CI/CD
