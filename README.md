@@ -86,7 +86,7 @@ flyctl deploy
 ## Todo
 
 - [ ] look into eslint changes in original vite output `README.md`
-- [ ] add tests
+- [ ] add tests (https://vitest.dev/)
 - [ ] add CI/CD
 - [ ] add monitoring/logs
 - [ ] responsive for mobile usage

@@ -6,11 +6,16 @@ in
 {
   name = "voxdocs";
 
-  processes.start.exec = "npm run dev";
+  processes.client.exec = "npm run dev -- --host";
+  processes.server.exec = "cd server && npm run dev";
+
+  # process.managers.overmind.enable = true;
+  # process.managers.process-compose.enable = false;
+
   scripts.build.exec = "build-server && build-client";
   scripts.build-server.exec = "cd server && npm run build";
   scripts.build-client.exec = "npm run build";
-  scripts.prod-serve.exec = "node ./dist/server.js";
+  scripts.prod-serve.exec = "ENV=prod node ./dist/server.js";
 
   # https://devenv.sh/languages/
   languages.typescript.enable = !isBuilding;
