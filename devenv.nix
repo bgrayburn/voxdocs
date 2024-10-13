@@ -33,6 +33,7 @@ in
 
   # https://devenv.sh/pre-commit-hooks/
   pre-commit.hooks.prettier.enable = !isBuilding;
+  pre-commit.hooks.eslint.enable = !isBuilding;
 
   containers."voxdocs".name = "voxdocs";
   containers."voxdocs".registry = "docker://registry.fly.io/";
