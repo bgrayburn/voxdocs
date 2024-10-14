@@ -63,7 +63,10 @@ function App() {
   const buttons: InterfaceButton[] = [
     {
       label: "copy",
-      callback: () => navigator.clipboard.writeText(text),
+      callback: () => {
+        navigator.clipboard.writeText(text);
+        toast("Copied to clipboard");
+      },
     },
     {
       label: "load",
