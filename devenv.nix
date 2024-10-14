@@ -4,18 +4,17 @@ let
   isBuilding = config.container.isBuilding;
 in 
 {
-  name = "voxdocs";
-
   processes.client.exec = "npm run dev -- --host";
   processes.server.exec = "cd server && npm run dev";
 
   # process.managers.overmind.enable = true;
   # process.managers.process-compose.enable = false;
 
-  scripts.build.exec = "build-server && build-client";
+  scripts.build.exec = "rm -rf $DEVENV_ROOT/dist && build-server && build-client";
   scripts.build-server.exec = "cd server && npm run build";
   scripts.build-client.exec = "npm run build";
-  scripts.prod-serve.exec = "ENV=prod node ./dist/server.js";
+  scripts.prod-serve.exec = "ENV=prod node ./dist/server.mjs";
+  scripts.deploy.exec = "devenv container copy voxdocs && flyctl deploy";
 
   # https://devenv.sh/languages/
   languages.typescript.enable = !isBuilding;
@@ -27,6 +26,8 @@ in
   packages = with pkgs; [] ++ lib.optionals (!isBuilding) [
     gh
     flyctl
+  ] ++ lib.optionals (isBuilding) [
+    cacert
   ];
 
   scripts.github.exec = "gh repo view -w";
@@ -38,15 +39,15 @@ in
   containers."voxdocs".name = "voxdocs";
   containers."voxdocs".registry = "docker://registry.fly.io/";
   containers."voxdocs".copyToRoot = ./dist;
-  containers."voxdocs".startupCommand = "node server.js";
+  containers."voxdocs".startupCommand = "node server.mjs";
   containers."voxdocs".defaultCopyArgs = [
     "--dest-creds"
     "x:\"$(${pkgs.flyctl}/bin/flyctl auth token)\""
   ];
 
 
-  dotenv.enable = true;
-  difftastic.enable = true;
+  dotenv.enable = !isBuilding;
+  difftastic.enable = !isBuilding;
 
   # See full reference at https://devenv.sh/reference/options/
 }
