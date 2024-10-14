@@ -7,9 +7,6 @@ in
   processes.client.exec = "npm run dev -- --host";
   processes.server.exec = "cd server && npm run dev";
 
-  # process.managers.overmind.enable = true;
-  # process.managers.process-compose.enable = false;
-
   scripts.build.exec = "rm -rf $DEVENV_ROOT/dist && build-server && build-client";
   scripts.build-server.exec = "cd server && npm run build";
   scripts.build-client.exec = "npm run build";
