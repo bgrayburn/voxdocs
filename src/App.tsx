@@ -31,12 +31,9 @@ function App() {
     setShowPendingAction(false);
     if (response.ok) {
       const res_obj = await response.json();
-      console.log(res_obj);
       const document = res_obj.document;
-      console.log(`document: ${document}`);
       setText(document);
       const message = res_obj.message;
-      console.log(`message: ${message}`);
       if (message) {
         toast(message);
       }
