@@ -20,6 +20,10 @@ in
     npm.install.enable = !isBuilding;
   };
 
+  enterShell = if !isBuilding then ''
+    [ ! -d $DEVENV_ROOT/server/node_modules ] && cd $DEVENV_ROOT/server && npm i
+  '' else "";
+
   packages = with pkgs; [] ++ lib.optionals (!isBuilding) [
     gh
     flyctl
