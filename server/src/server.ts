@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-// import cors from 'cors';
+import cors from "cors";
 import { fileURLToPath } from "url";
 import path from "path";
 import bodyParser from "body-parser";
@@ -18,7 +18,7 @@ interface RequestBody {
 const app = express();
 
 // Middleware
-// app.use(cors());
+app.use(cors());
 app.use(bodyParser.json());
 
 if (process.env.ENV != "dev") {

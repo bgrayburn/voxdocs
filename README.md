@@ -107,6 +107,7 @@ flyctl deploy
 
 ## Todo
 
+- [ ] tighten up cors
 - [ ] look into eslint changes in original vite output `README.md`
 - [ ] add tests (https://vitest.dev/)
 - [ ] automate `npm i` for server
