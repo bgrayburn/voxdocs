@@ -9,7 +9,19 @@ in
 
   scripts.build.exec = "rm -rf $DEVENV_ROOT/dist && build-server && build-client";
   scripts.build-server.exec = "cd server && npm run build";
-  scripts.build-client.exec = "npm run build";
+  scripts.build-client.exec = ''
+    current_branch=$(git rev-parse --abbrev-ref HEAD)
+
+    # Check if the current branch is 'main'
+    if [ "$current_branch" = "main" ]; then
+      # Run the first command only if on the 'main' branch
+      echo "On main branch. Bumping version..."
+      # Replace this with the actual command you want to run
+      npm version minor
+    fi
+
+    npm run build
+  '';
   scripts.prod-serve.exec = "ENV=prod node ./dist/server.mjs";
   scripts.deploy.exec = "devenv container copy voxdocs && flyctl deploy";
 
