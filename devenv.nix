@@ -45,6 +45,7 @@ in
 
   dotenv.enable = !isBuilding;
   difftastic.enable = !isBuilding;
+  devcontainer.enable = !isBuilding;
 
   # See full reference at https://devenv.sh/reference/options/
 }
