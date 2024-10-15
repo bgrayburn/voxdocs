@@ -2,7 +2,7 @@
   "name": "voxdocs",
   "private": true,
   "type": "module",
-  "version": "0.1.0",
+  "version": "0.1.1-pre",
   "scripts": {
     "dev": "npx vite",
     "build": "tsc -b && vite build",
