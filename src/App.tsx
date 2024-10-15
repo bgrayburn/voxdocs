@@ -1,21 +1,13 @@
 import { useEffect, useRef, useState } from "react";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
-import { download } from "./util/fileUtil";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./components/loader.css";
+import "./components/docViewer";
+import { DocViewer } from "./components/docViewer";
+import { Menu } from "./components/menu";
+import { button_menu_classes } from "./styles/buttons";
 
 const SERVER_URL = window.location;
-
-const button_classes =
-  "border-2 bg-black text-white w-fit p-3 rounded-full drop-showdow-md";
-const button_menu_classes = `${button_classes} w-44`;
-
-type InterfaceButton = {
-  label: string;
-  callback: () => void;
-};
 
 function App() {
   const [text, setText] = useState<string>("");
@@ -60,32 +52,12 @@ function App() {
     chatbox?.current?.focus();
   }, []);
 
-  const buttons: InterfaceButton[] = [
-    {
-      label: "copy",
-      callback: () => {
-        navigator.clipboard.writeText(text);
-        toast("Copied to clipboard");
-      },
-    },
-    {
-      label: "load",
-      callback: () => setText(prompt("Text to import:") || text),
-    },
-    {
-      label: "save",
-      callback: () => download(text, "", "text"),
-    },
-  ];
-
   return (
     <>
       <div className="App static md:p-5 flex flex-row h-screen w-screen">
         <div id="left-col" className="flex-auto flex md:mx-5 flex-col h-full">
           <div className="prose m-auto w-full overflow-scroll flex-1 bg-orange-100 rounded-md p-5">
-            <ReactMarkdown remarkPlugins={[remarkGfm]}>
-              {text ? text : "..."}
-            </ReactMarkdown>
+            <DocViewer text={text} />
           </div>
           <div id="input-bar" className="w-3/4 m-auto">
             <form
@@ -116,17 +88,7 @@ function App() {
           </div>
         </div>
         <div id="right-col" className="md:w-44 flex-col">
-          {buttons.map((b) => (
-            <button
-              type="button"
-              key={b.label}
-              id={`${b.label}-button`}
-              className={button_menu_classes}
-              onClick={b.callback}
-            >
-              {b.label}
-            </button>
-          ))}
+          <Menu text={text} setText={setText} />
         </div>
       </div>
       <ToastContainer position="top-left" theme="colored" closeOnClick />
