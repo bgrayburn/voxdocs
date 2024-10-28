@@ -111,7 +111,7 @@ flyctl deploy
 - [ ] ability to see diffs across updates
 - [ ] look into eslint changes in original vite output `README.md`
 - [ ] add tests (https://vitest.dev/)
-- [ ] automate `npm i` for server
+- [x] automate `npm i` for server
 - [ ] add CI/CD (github actions?)
 - [ ] responsive for mobile usage
 - [ ] interactive checkboxes
