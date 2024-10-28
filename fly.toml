@@ -11,6 +11,11 @@ protocol = "tcp"
 handlers = ["tls", "http"]
 port = "443"
 
+[[services.port]]
+handlers = ["http"]
+port = 80
+force_https = true
+
 [mounts]
 source="devenv_state"
 destination="/.devenv/state"
