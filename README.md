@@ -2,6 +2,8 @@
 
 ![animation of voxdocs being used to create and use a grocery list](./docs/voxdocs.gif)
 
+[Try it out here!](https://voxdocs.brianrayburn.tech)
+
 ## Summary
 
 This app was created as a simple example of building a UI utlizing OpenAI's APIs for data transforms.
