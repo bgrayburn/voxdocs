@@ -2,6 +2,7 @@ import OpenAI from "openai";
 
 // Initialize the OpenAI client
 const openai = new OpenAI({
+  baseURL: process.env.OPENAI_API_BASE_URL ?? "https://api.openai.com/v1", // Use the appropriate base URL for your environment
   apiKey: process.env.OPENAI_API_KEY,
 });
 
