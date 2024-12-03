@@ -110,6 +110,8 @@ flyctl deploy
 ## Todo
 
 - [ ] tighten up cors
+- [x] use `response_format` set to `json_schema` instead of function to assure response object schema
+- [ ] use `prediction` openai field to speed up generation
 - [ ] ability to see diffs across updates
 - [ ] look into eslint changes in original vite output `README.md`
 - [ ] add tests (https://vitest.dev/)

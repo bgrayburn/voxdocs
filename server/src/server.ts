@@ -1,3 +1,4 @@
+import { z } from "zod";
 import express, { Request, Response } from "express";
 import cors from "cors";
 import { fileURLToPath } from "url";
@@ -17,6 +18,11 @@ interface RequestBody {
 // Initialize Express app
 const app = express();
 
+const InstructionResponseSchema = z.object({
+  document: z.string().describe("The text of the updated document"),
+  message: z.string().describe("The message to the user"),
+});
+
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
@@ -33,7 +39,10 @@ app.post("/api/instruct", async (req: Request, res: Response) => {
   console.log("Incoming request");
   const { instruction, document } = req.body as RequestBody;
 
-  const assistantRes = await getAssistantResponse({ instruction, document });
+  const assistantRes = await getAssistantResponse(
+    { instruction, document },
+    InstructionResponseSchema,
+  );
 
   if (!assistantRes.error) {
     res.json(assistantRes);
