@@ -1,6 +1,6 @@
-import { download } from "../util/fileUtil";
+import { download } from "@/util/fileUtil";
 import { toast } from "react-toastify";
-import { button_menu_classes } from "../styles/buttons";
+import { Button } from "@/components/ui/button";
 
 type MenuProps = {
   text: string;
@@ -32,18 +32,18 @@ export const Menu = ({ text, setText }: MenuProps) => {
   ];
 
   return (
-    <>
+    <span className="flex-row float-right">
       {buttons.map((b) => (
-        <button
+        <Button
           type="button"
           key={b.label}
           id={`${b.label}-button`}
-          className={button_menu_classes}
+          className="m-1"
           onClick={b.callback}
         >
           {b.label}
-        </button>
+        </Button>
       ))}
-    </>
+    </span>
   );
 };

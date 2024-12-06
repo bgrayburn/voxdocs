@@ -6,7 +6,9 @@ type DocViewerProps = {
 };
 
 export const DocViewer = ({ text }: DocViewerProps) => (
-  <ReactMarkdown remarkPlugins={[remarkGfm]}>
-    {text ? text : "..."}
-  </ReactMarkdown>
+  <span className="m-auto overflow-scroll rounded-md p-5">
+    <ReactMarkdown remarkPlugins={[remarkGfm]}>
+      {text ? text : "..."}
+    </ReactMarkdown>
+  </span>
 );
