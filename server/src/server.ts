@@ -45,9 +45,7 @@ app.post("/api/instruct", async (req: Request, res: Response) => {
     InstructionResponseSchema,
   );
 
-  if (!assistantRes.error) {
-    res.json(assistantRes);
-  }
+  res.json(assistantRes);
 });
 
 // Start the server
