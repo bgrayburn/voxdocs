@@ -117,7 +117,7 @@ flyctl deploy
 - [ ] add tests (https://vitest.dev/)
 - [x] automate `npm i` for server
 - [ ] add CI/CD (github actions?)
-- [ ] responsive for mobile usage
+- [x] responsive for mobile usage
 - [ ] interactive checkboxes
 - [ ] settings panel
 - [ ] voice output (messages only)
@@ -125,3 +125,7 @@ flyctl deploy
 - [ ] user ability to store api key in local session and make requests from client avoiding the need for a deployed backend (?)
 - [ ] mobile app version (?)
 - [ ] history (?)
+- [ ] document storage (?)
+  - localstorage (?)
+  - in url (?)
+  - server side (?)

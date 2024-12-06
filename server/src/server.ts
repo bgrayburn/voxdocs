@@ -40,7 +40,8 @@ app.post("/api/instruct", async (req: Request, res: Response) => {
   const { instruction, document } = req.body as RequestBody;
 
   const assistantRes = await getAssistantResponse(
-    { instruction, document },
+    instruction,
+    document,
     InstructionResponseSchema,
   );
 

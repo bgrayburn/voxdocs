@@ -15,7 +15,8 @@ const prompt =
 
 // Function to get a response conforming to the specified JSON schema
 export async function getAssistantResponse<T extends z.ZodRawShape>(
-  jsonInput: object,
+  instruction: string,
+  document: string,
   responseSchema: z.ZodObject<T>,
 ) {
   try {
@@ -23,7 +24,7 @@ export async function getAssistantResponse<T extends z.ZodRawShape>(
       model: modelName,
       messages: [
         { role: "user", content: prompt },
-        { role: "user", content: JSON.stringify(jsonInput) },
+        { role: "user", content: JSON.stringify({ document, instruction }) },
       ],
       response_format: zodResponseFormat(responseSchema, "response_schema"),
     });
