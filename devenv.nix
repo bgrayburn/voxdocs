@@ -18,11 +18,14 @@ in
   languages.typescript.enable = !isBuilding;
   languages.javascript = {
     enable = true;
+    npm.enable = true;
     npm.install.enable = !isBuilding;
   };
 
   enterShell = if !isBuilding then ''
-    [ ! -d $DEVENV_ROOT/server/node_modules ] && cd $DEVENV_ROOT/server && npm i
+    if [ ! -d "$DEVENV_ROOT/server/node_modules" ]; then
+      (cd "$DEVENV_ROOT/server" && npm i)
+    fi
   '' else "";
 
   packages = with pkgs; [] ++ lib.optionals (!isBuilding) [
@@ -49,7 +52,7 @@ in
 
 
   dotenv.enable = !isBuilding;
-  difftastic.enable = !isBuilding;
+  delta.enable = !isBuilding;
 
   # See full reference at https://devenv.sh/reference/options/
 }
