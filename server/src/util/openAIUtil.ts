@@ -8,7 +8,7 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-const modelName = process.env.MODEL_NAME ?? "gpt-4o-mini";
+const modelName = process.env.MODEL_NAME ?? "gpt-6-luna";
 
 const prompt =
   "You are an assistant to someone editing a markdown document.  Please always return just the documents text after making any changes the user asked for. Don't write any new text unless explicitly asked to.";
