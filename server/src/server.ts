@@ -39,13 +39,17 @@ app.post("/api/instruct", async (req: Request, res: Response) => {
   console.log("Incoming request");
   const { instruction, document } = req.body as RequestBody;
 
-  const assistantRes = await getAssistantResponse(
-    instruction,
-    document,
-    InstructionResponseSchema,
-  );
+  try {
+    const assistantRes = await getAssistantResponse(
+      instruction,
+      document,
+      InstructionResponseSchema,
+    );
 
-  res.json(assistantRes);
+    res.json(assistantRes);
+  } catch {
+    res.status(502).json({ error: "Failed to generate an assistant response" });
+  }
 });
 
 // Start the server
