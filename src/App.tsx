@@ -9,11 +9,27 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 const SERVER_URL = window.location;
+const DOCUMENT_STORAGE_KEY = "voxdocs.document";
 
 function App() {
-  const [text, setText] = useState<string>("");
+  const [text, setText] = useState<string>(() => {
+    try {
+      return window.localStorage.getItem(DOCUMENT_STORAGE_KEY) ?? "";
+    } catch {
+      // Keep the editor usable when browser storage is unavailable.
+      return "";
+    }
+  });
   const [instruction, setInstruction] = useState<string>("");
   const [showPendingAction, setShowPendingAction] = useState<boolean>(false);
+
+  useEffect(() => {
+    try {
+      window.localStorage.setItem(DOCUMENT_STORAGE_KEY, text);
+    } catch {
+      // Document changes still work if storage is unavailable or full.
+    }
+  }, [text]);
 
   async function submitInstruction(submittedInstruction: string) {
     setInstruction("");
