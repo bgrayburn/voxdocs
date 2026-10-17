@@ -57,7 +57,7 @@ function App() {
           <Menu text={text} setText={setText} />
         </div>
         <div className="prose mx-auto w-3/4 sm:w-full overflow-scroll flex-1 bg-slate-100 rounded-md px-5">
-          <DocViewer text={text} />
+          <DocViewer text={text} setText={setText} />
         </div>
         <div id="input-bar" className="w-full md:w-2/3 m-auto mt-5 flex-0">
           <form
