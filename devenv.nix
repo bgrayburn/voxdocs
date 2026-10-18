@@ -4,7 +4,6 @@ let
   isBuilding = config.container.isBuilding;
 in 
 {
-  process.manager.implementation = "overmind";
   processes.client.exec = "npm run dev -- --host";
   processes.server.exec = "cd server && npm run dev";
 
