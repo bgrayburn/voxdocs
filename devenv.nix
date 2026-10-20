@@ -49,7 +49,6 @@ in
     "x:\"$(${pkgs.flyctl}/bin/flyctl auth token)\""
   ];
 
-
   dotenv.enable = !isBuilding;
   delta.enable = !isBuilding;
 

@@ -144,7 +144,7 @@ flyctl deploy
 - [x] automate `npm i` for server
 - [x] add CI (GitHub Actions tests and builds)
 - [x] responsive for mobile usage
-- [ ] interactive checkboxes
+- [x] interactive checkboxes
 - [ ] settings panel
 - [ ] voice output (messages only)
 - [ ] voice input
@@ -152,6 +152,6 @@ flyctl deploy
 - [ ] mobile app version (?)
 - [ ] history (?)
 - [ ] document storage (?)
-  - localstorage (?)
+  - [x] localstorage
   - in url (?)
   - server side (?)
