@@ -4,12 +4,12 @@ let
   isBuilding = config.container.isBuilding;
 in 
 {
-  processes.client.exec = "npm run dev -- --host";
-  processes.server.exec = "cd server && npm run dev";
+  processes.client.exec = "pnpm dev --host";
+  processes.server.exec = "pnpm --dir server dev";
 
   scripts.build.exec = "rm -rf $DEVENV_ROOT/dist && build-server && build-client";
-  scripts.build-server.exec = "cd server && npm run build";
-  scripts.build-client.exec = "npm run build";
+  scripts.build-server.exec = "pnpm --dir server build";
+  scripts.build-client.exec = "pnpm build";
   scripts.prod-serve.exec = "ENV=prod node ./dist/server.mjs";
   scripts.deploy.exec = "devenv container copy voxdocs && flyctl deploy";
 
@@ -17,14 +17,13 @@ in
   languages.typescript.enable = !isBuilding;
   languages.javascript = {
     enable = true;
-    npm.enable = true;
-    npm.install.enable = !isBuilding;
+    # Corepack uses the pnpm version pinned in package.json.
+    corepack.enable = true;
   };
 
   enterShell = if !isBuilding then ''
-    if [ ! -d "$DEVENV_ROOT/server/node_modules" ]; then
-      (cd "$DEVENV_ROOT/server" && npm i)
-    fi
+    pnpm --dir "$DEVENV_ROOT" install --frozen-lockfile
+    pnpm --dir "$DEVENV_ROOT/server" install --frozen-lockfile
   '' else "";
 
   packages = with pkgs; [] ++ lib.optionals (!isBuilding) [

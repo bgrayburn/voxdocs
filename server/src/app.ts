@@ -1,5 +1,5 @@
 import { z } from "zod";
-import express, { Request, Response } from "express";
+import express, { Express, Request, Response } from "express";
 import cors from "cors";
 import { fileURLToPath } from "url";
 import path from "path";
@@ -16,7 +16,7 @@ interface RequestBody {
 }
 
 // Initialize Express app
-export const app = express();
+export const app: Express = express();
 
 const InstructionResponseSchema = z.object({
   document: z.string().describe("The text of the updated document"),
