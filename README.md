@@ -78,6 +78,24 @@ GitHub Actions runs coverage, both builds, and the browser test on pushes and pu
 
 ## Deployment
 
+### Automatic deployment
+
+Every push to `main`, including merged pull requests, runs CI and deploys to the
+existing Fly.io app only after tests, both builds, and the browser smoke test pass.
+The deployment workflow uses the `dist/` artifact from that CI run to build and
+push the existing devenv container, then runs `flyctl deploy`. Deployments are
+serialized to avoid overlapping releases.
+
+Add a GitHub Actions repository secret named `FLY_API_TOKEN` under **Settings →
+Secrets and variables → Actions**. Generate an app-scoped deploy token with:
+
+```sh
+flyctl tokens create deploy --app voxdocs
+```
+
+The Fly.io app, volume, and runtime secrets must already be configured as described
+below. Pull request CI runs do not deploy.
+
 ### Build the app
 
 #### w/Nix
