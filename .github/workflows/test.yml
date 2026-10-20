@@ -10,20 +10,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: npm
+          cache: "pnpm"
           cache-dependency-path: |
-            package-lock.json
-            server/package-lock.json
-      - run: npm ci
-      - run: npm ci --prefix server
-      - run: npm run test:coverage
-      - run: npm run build
-      - run: npm run build --prefix server
-      - run: npx playwright install --with-deps chromium
-      - run: npm run test:e2e
+            pnpm-lock.yaml
+            server/pnpm-lock.yaml
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm --dir server install --frozen-lockfile
+      - run: pnpm test:coverage
+      - run: pnpm build
+      - run: pnpm --dir server build
+      - run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm test:e2e
       - uses: actions/upload-artifact@v4
         if: always()
         with:
