@@ -22,6 +22,9 @@ jobs:
         with:
           name: production-build
           path: dist/
+      # Nix's Git source filter only includes files tracked in the index.
+      - name: Make build artifact visible to Nix
+        run: git add --force dist/
       - uses: cachix/install-nix-action@v31
       - uses: cachix/cachix-action@v16
         with:
