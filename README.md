@@ -150,26 +150,3 @@ Deploy your app:
 ```
 flyctl deploy
 ```
-
-## Todo
-
-- [ ] tighten up cors
-- [x] use `response_format` set to `json_schema` instead of function to assure response object schema
-- [ ] use `prediction` openai field to speed up generation
-- [ ] ability to see diffs across updates
-- [ ] look into eslint changes in original vite output `README.md`
-- [x] add tests (https://vitest.dev/)
-- [x] automate dependency installation for server
-- [x] add CI (GitHub Actions tests and builds)
-- [x] responsive for mobile usage
-- [x] interactive checkboxes
-- [ ] settings panel
-- [ ] voice output (messages only)
-- [ ] voice input
-- [ ] user ability to store api key in local session and make requests from client avoiding the need for a deployed backend (?)
-- [ ] mobile app version (?)
-- [ ] history (?)
-- [ ] document storage (?)
-  - [x] localstorage
-  - in url (?)
-  - server side (?)
