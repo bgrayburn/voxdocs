@@ -37,3 +37,8 @@ devenv.local.nix
 .pre-commit-config.yaml
 
 *.tsbuildinfo
+
+# Test artifacts
+coverage/
+playwright-report/
+test-results/
