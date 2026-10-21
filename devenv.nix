@@ -17,8 +17,9 @@ in
   languages.typescript.enable = !isBuilding;
   languages.javascript = {
     enable = true;
-    # Corepack uses the pnpm version pinned in package.json.
-    corepack.enable = true;
+    # Corepack's downloaded native pnpm binary cannot run directly on NixOS.
+    pnpm.enable = true;
+    pnpm.package = pkgs.callPackage ./pnpm.nix {};
   };
 
   enterShell = if !isBuilding then ''
